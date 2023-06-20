@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <h1>All Headings</h1>
+    <ul>
+        {% for heading, link in headings %}
+            <li>
+                <a href="{{ link }}" target="_blank" >{{ heading }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
