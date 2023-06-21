@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h3>Showing all news related to "{{query}}":</h3>
+<h4>Number of news found : {{number_of_filtered_headings}}</h4>
+{% for heading, link in headings %}
+<li>
+    <a href="{{link}}" target="_blank">{{heading}}</a>
+</li>
+{% endfor %}
+
+{% endblock %}
