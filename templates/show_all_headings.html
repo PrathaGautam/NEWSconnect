@@ -1,7 +1,9 @@
 {% extends "index.html" %}
 
 {% block content %}
-    <h1>All Headings</h1>
+
+
+    <h4>Total number of news found : {{ number_of_news }}</h4>
     <ul>
         {% for heading, link in headings %}
             <li>

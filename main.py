@@ -41,10 +41,9 @@ def fetch_headings_with_links() -> List[Tuple[str, str]]:
     headings_newyork = soup.select(".indicate-hover")
     links = soup.select(".css-9mylee")
 
-    for heading in headings_newyork:
+    for heading,link_element in zip(headings_newyork,links):
         text_heading = heading.text
-        for link in links:
-            link = link["href"]
+        link = link_element["href"]
         headings_with_links.append((text_heading, link))
 
     # dailymail
@@ -65,7 +64,29 @@ def fetch_headings_with_links() -> List[Tuple[str, str]]:
 @app.get("/showallheadings")
 def show_all_headings(request: Request):
     headings_with_links = fetch_headings_with_links()
-    return templates.TemplateResponse("show_all_headings.html", {"request": request, "headings": headings_with_links})
+    number_of_news = len(headings_with_links)
+    return templates.TemplateResponse("show_all_headings.html", {"request": request, "headings": headings_with_links, "number_of_news":number_of_news})
+
+
+@app.get("/search")
+def search_news(request: Request, query: str):
+    filtered_headings = filter_headings(query)
+    number_of_filtered_headings = len(filtered_headings)
+    return templates.TemplateResponse("search_headings.html",{"request": request, "headings":filtered_headings, "query":query, "number_of_filtered_headings":number_of_filtered_headings})
+
+
+def filter_headings(query: str) -> List[Tuple[str,str]]:
+    headings_with_links = fetch_headings_with_links()
+    filtered_headings=[]
+    for heading, link in headings_with_links:
+        if query.lower() in heading.lower():
+            filtered_headings.append((heading,link))
+
+    return filtered_headings
+
+
+
+
 
 
 # total_headings = len(headings_bbc)+len(headings_newyork)+len(headings_dailymail)
