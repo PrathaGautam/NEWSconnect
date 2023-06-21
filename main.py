@@ -12,7 +12,8 @@ templates = Jinja2Templates(directory="templates")
 @app.get("/")
 def index(request: Request):
     headings_with_links = fetch_headings_with_links()
-    return templates.TemplateResponse("index.html", {"request": request, "headings": headings_with_links})
+    return templates.TemplateResponse("index.html", {"request": request,
+                                                     "headings": headings_with_links})
 
 
 def fetch_headings_with_links() -> List[Tuple[str, str]]:
@@ -41,7 +42,7 @@ def fetch_headings_with_links() -> List[Tuple[str, str]]:
     headings_newyork = soup.select(".indicate-hover")
     links = soup.select(".css-9mylee")
 
-    for heading,link_element in zip(headings_newyork,links):
+    for heading, link_element in zip(headings_newyork, links):
         text_heading = heading.text
         link = link_element["href"]
         headings_with_links.append((text_heading, link))
@@ -56,7 +57,7 @@ def fetch_headings_with_links() -> List[Tuple[str, str]]:
         urls = heading.a["href"]
         if not urls.startswith("https"):
             urls = "https://www.dailymail.co.uk/" + urls
-        headings_with_links.append((text_heading,urls))
+        headings_with_links.append((text_heading, urls))
 
     return headings_with_links
 
@@ -65,33 +66,26 @@ def fetch_headings_with_links() -> List[Tuple[str, str]]:
 def show_all_headings(request: Request):
     headings_with_links = fetch_headings_with_links()
     number_of_news = len(headings_with_links)
-    return templates.TemplateResponse("show_all_headings.html", {"request": request, "headings": headings_with_links, "number_of_news":number_of_news})
+    return templates.TemplateResponse("show_all_headings.html", {
+        "request": request, "headings": headings_with_links, "number_of_news": number_of_news})
 
 
 @app.get("/search")
 def search_news(request: Request, query: str):
     filtered_headings = filter_headings(query)
     number_of_filtered_headings = len(filtered_headings)
-    return templates.TemplateResponse("search_headings.html",{"request": request, "headings":filtered_headings, "query":query, "number_of_filtered_headings":number_of_filtered_headings})
+    return templates.TemplateResponse("search_headings.html", {
+        "request": request,
+        "headings": filtered_headings,
+        "query": query,
+        "number_of_filtered_headings": number_of_filtered_headings})
 
 
-def filter_headings(query: str) -> List[Tuple[str,str]]:
+def filter_headings(query: str) -> List[Tuple[str, str]]:
     headings_with_links = fetch_headings_with_links()
-    filtered_headings=[]
+    filtered_headings = []
     for heading, link in headings_with_links:
         if query.lower() in heading.lower():
-            filtered_headings.append((heading,link))
+            filtered_headings.append((heading, link))
 
     return filtered_headings
-
-
-
-
-
-
-# total_headings = len(headings_bbc)+len(headings_newyork)+len(headings_dailymail)
-# print(f"Total headings found from BBC, NewYork Times and Daily Mail: ", total_headings)
-#
-# print("Number of headings in BBC : " + str(len(headings_bbc)))
-# print("Number of headings in NewYork Times : "+str(len(headings_newyork)))
-# print("Number of headings in Daily Mail : "+str(len(headings_dailymail)))
