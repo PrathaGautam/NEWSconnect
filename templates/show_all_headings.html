@@ -1,10 +1,9 @@
 {% extends "index.html" %}
 
-{% block content %}
-
-
-    <h4>Total number of news found : {{ number_of_news }}</h4>
-    <ul>
+{% block news_content %}
+<div class="all_headings">
+    <h4 style= "color:white">Total number of news found : {{ number_of_news }}</h4>
+    <ul style= "color:white">
         {% for heading, link in headings %}
             <li>
                 <a href="{{ link }}" target="_blank" >{{ heading }}</a>
@@ -12,3 +11,4 @@
         {% endfor %}
     </ul>
 {% endblock %}
+    </div>

@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/static/style.css">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+
+<div id="particles-js"></div>
+<script src="/static/particles.js"></script>
+<script src="/static/app.js"></script>
 <div class="all_content">
     <div class="content_wrapper">
-<h1> NEWSconnect.</h1>
-<h2 class="slogan"> Stay informed with the latest headlines from top news portals, explore <br> diverse perspectives, and discover breaking stories all in one place.</h2>
-<a href="/showallheadings" class="allheadings_button" >SHOW ALL HEADINGS</a>
+<h1 style= "color:white"> NEWSconnect.</h1>
+<h2 style= "color:white"class="slogan"> Stay informed with the latest headlines from top news portals, explore <br> diverse perspectives, and discover breaking stories all in one place.</h2>
+<a href="/showallheadings" class="allheadings_button" >Show All Headings</a>
         <form action ="/search" method="get" class="search_form">
-        <input type="text" name="query" placeholder="&nbsp;Search news..">
-            <button type="submit" class="search_link">Search</button>
+       <br> <input type="text" name="query" class ="search_bar" placeholder="&nbsp;Search news..">
+            <button type="submit" class="allheadings_button">Search</button>
         </form>
-            <h2>Latest News from BBC, NeyYork Times and DailyMail</h2>
+            <h2 style= "color:white">Latest News from BBC, NeyYork Times and DailyMail.</h2>
+        {% block news_content %}{% endblock %}
     </div>
 </div>
-
- {% block content %}{% endblock %}
+</div>
+{% block content %}
+{% endblock %}
 </body>
 </html>

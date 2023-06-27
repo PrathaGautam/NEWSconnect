@@ -3,10 +3,12 @@ from typing import List, Tuple
 import requests
 import bs4
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 @app.get("/")
@@ -71,7 +73,7 @@ def show_all_headings(request: Request):
 
 
 @app.get("/search")
-def search_news(request: Request, query: str):
+def search_news(request: Request, query: str=""):
     filtered_headings = filter_headings(query)
     number_of_filtered_headings = len(filtered_headings)
     return templates.TemplateResponse("search_headings.html", {
