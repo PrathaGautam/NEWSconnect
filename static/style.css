@@ -4,7 +4,7 @@ body{
     padding:0;
     height: 100vh;
     position:relative;
-    display: flex; /* Use flexbox */
+    display: flex;
     overflow: hidden;
     justify-content: center;
     align-items: center;
@@ -24,9 +24,9 @@ body{
 
 .content_wrapper {
   position: relative;
-  z-index: 1; /* Set the content wrapper to a higher z-index */
-  height: calc(100vh - 40px); /* Subtract any header height if applicable */
-  overflow-y: scroll; /* Enable vertical scrolling for content */
+  z-index: 1;
+  height: calc(100vh - 40px);
+  overflow-y: scroll;
 }
 
 .allheadings_button{
@@ -57,13 +57,13 @@ body{
 }
 
 a {
-            color: #1d790a; /* Blue color */
-            text-decoration: none; /* Remove underline */
-            transition: color 0.3s ease; /* Smooth color transition on hover */
+            color: #1d790a;
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         a:hover {
-            color: #e1e1dd; /* Darker shade of blue on hover */
+            color: #e1e1dd;
         }
 
 

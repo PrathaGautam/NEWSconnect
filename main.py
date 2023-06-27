@@ -14,8 +14,9 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 @app.get("/")
 def index(request: Request):
     headings_with_links = fetch_headings_with_links()
-    return templates.TemplateResponse("index.html", {"request": request,
-                                                     "headings": headings_with_links})
+    return templates.TemplateResponse("index.html", {
+        "request": request,
+        "headings": headings_with_links})
 
 
 def fetch_headings_with_links() -> List[Tuple[str, str]]:
@@ -68,8 +69,12 @@ def fetch_headings_with_links() -> List[Tuple[str, str]]:
 def show_all_headings(request: Request):
     headings_with_links = fetch_headings_with_links()
     number_of_news = len(headings_with_links)
-    return templates.TemplateResponse("show_all_headings.html", {
-        "request": request, "headings": headings_with_links, "number_of_news": number_of_news})
+    return templates.TemplateResponse("show_all_headings.html",
+                                      {
+                                         "request": request,
+                                          "headings": headings_with_links,
+                                          "number_of_news": number_of_news
+                                      })
 
 
 @app.get("/search")
