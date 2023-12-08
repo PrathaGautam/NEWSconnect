@@ -78,7 +78,7 @@ def show_all_headings(request: Request):
 
 
 @app.get("/search")
-def search_news(request: Request, query: str=""):
+def search_news(request: Request, query: str = ""):
     filtered_headings = filter_headings(query)
     number_of_filtered_headings = len(filtered_headings)
     return templates.TemplateResponse("search_headings.html", {
