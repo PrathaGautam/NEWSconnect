@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.9 (News_Aggregator)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.9 (News_Aggregator)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10 (News_Aggregator_New)" project-jdk-type="Python SDK" />
 </project>
