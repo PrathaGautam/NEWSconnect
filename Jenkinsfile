@@ -8,9 +8,20 @@ pipeline {
     }
 
     stage('Log') {
-      steps {
-        sh '''ls -la
+      parallel {
+        stage('Log') {
+          steps {
+            sh '''ls -la
 '''
+          }
+        }
+
+        stage('test_code') {
+          steps {
+            sh 'pytest test_main.py'
+          }
+        }
+
       }
     }
 
